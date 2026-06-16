@@ -1,8 +1,6 @@
 
 # Dependencies
 node_modules/
-package-lock.json
-npm-debug.log
 
 # Playwright
 /test-results/
@@ -12,9 +10,7 @@ npm-debug.log
 /playwright/.auth/
 
 # Environment variables
-.env
-.env.local
-.env.*.local
+.env.playwright.local
 
 # IDE
 .vscode/
@@ -23,27 +19,4 @@ npm-debug.log
 *.swo
 *.swn
 .DS_Store
-
-# Build output
-dist/
-build/
-
-# Reports
-/test-results/
-/playwright-report/
-
-# Logs
-*.log
-logs/
-
-# Screenshots and Videos
-/test-results/screenshots/
-/test-results/video/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# IDE settings
-*.code-workspace
 
