@@ -1,0 +1,49 @@
+
+# Dependencies
+node_modules/
+package-lock.json
+npm-debug.log
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+.DS_Store
+
+# Build output
+dist/
+build/
+
+# Reports
+/test-results/
+/playwright-report/
+
+# Logs
+*.log
+logs/
+
+# Screenshots and Videos
+/test-results/screenshots/
+/test-results/video/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE settings
+*.code-workspace
+

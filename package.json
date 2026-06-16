@@ -1,0 +1,31 @@
+{
+  "name": "planit-automation-framework",
+  "version": "1.0.0",
+  "description": "Simple Playwright TypeScript tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:contact": "playwright test src/tests/contact.spec.ts",
+    "test:shopping": "playwright test src/tests/shopping-cart.spec.ts",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "codegen": "playwright codegen http://jupiter.cloud.planittesting.com/"
+  },
+  "keywords": [
+    "playwright",
+    "typescript",
+    "automation",
+    "testing",
+    "e2e"
+  ],
+  "author": "Senior Automation Test Engineer",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "^1.61.0",
+    "@types/node": "^25.9.3",
+    "typescript": "^5.3.3"
+  }
+}
