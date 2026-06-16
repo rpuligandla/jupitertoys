@@ -57,6 +57,28 @@ npm run test:debug
 npm run test:report
 ```
 
+## Playwright Projects
+
+This project defines three Playwright browser projects in `playwright.config.ts`:
+
+- `chromium`
+- `firefox`
+- `webkit`
+
+By default, `npm test` runs the full suite across all configured browser projects.
+
+To run a single browser project locally:
+
+```bash
+npx playwright test --project=chromium
+```
+
+Or run a specific spec in one browser project:
+
+```bash
+npx playwright test src/tests/contact.spec.ts --project=firefox
+```
+
 ## GitHub Actions
 
 This repository includes a GitHub Actions workflow at `.github/workflows/web-test.yml`.

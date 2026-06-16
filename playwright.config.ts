@@ -28,7 +28,24 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { headless: config.headless },
+      use: {
+        browserName: "chromium",
+        headless: config.headless,
+      },
+    },
+    {
+      name: "firefox",
+      use: {
+        browserName: "firefox",
+        headless: config.headless,
+      },
+    },
+    {
+      name: "webkit",
+      use: {
+        browserName: "webkit",
+        headless: config.headless,
+      },
     },
   ],
 });

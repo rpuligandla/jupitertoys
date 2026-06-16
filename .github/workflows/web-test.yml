@@ -15,9 +15,15 @@ jobs:
   ui-tests:
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+
     permissions:
       contents: read
 
+    name: "Run Tests on ${{ matrix.browser }}"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -36,8 +42,8 @@ jobs:
         run: npx playwright install --with-deps
 
       # Run Tests Step
-      - name: Run All UI Tests
-        run: npm test
+      - name: Run UI Tests - ${{ matrix.browser }}
+        run: npx playwright test --project=${{ matrix.browser }}
         continue-on-error: true
 
       # Upload Report as Artifact Step
@@ -45,7 +51,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results-${{ github.run_number }}
+          name: test-results-${{ matrix.browser }}
           path: |
             test-results/
             playwright-report/
@@ -55,7 +61,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-${{ github.run_number }}
+          name: playwright-report-${{ matrix.browser }}
           path: playwright-report/
           retention-days: 7
 
@@ -68,11 +74,11 @@ jobs:
           echo "- **Run Number:** ${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Report Artifact:** playwright-report-${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Report Artifact:** playwright-report-${{ matrix.browser }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          if [ -f "test-results/results.json" ]; then
+          if [ -f "test-results/${{ matrix.browser }}/results.json" ]; then
             echo "### Test Results Summary" >> $GITHUB_STEP_SUMMARY
             echo '```json' >> $GITHUB_STEP_SUMMARY
-            cat test-results/results.json | jq '.stats' >> $GITHUB_STEP_SUMMARY
+            cat test-results/${{ matrix.browser }}/results.json | jq '.stats' >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
           fi
