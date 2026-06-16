@@ -11,6 +11,12 @@ test.beforeEach(async ({ homePage, contactPage }) => {
   await contactPage.waitForPageLoad();
 });
 
+// teardown after each test
+test.afterEach(async ({ page }) => {
+  // Optional: Cleanup after all tests
+  await page.close();
+});
+
 /**
  * Contact Form Test Cases
  * Validates form error handling and successful submission
@@ -25,13 +31,12 @@ test.describe("Contact Form - Test Suite", () => {
    * 4. Populate mandatory fields
    * 5. Verify error messages disappear
    */
-  test("TC-001: Validate form error messages and clear on population", async ({
+  test("TC-001: Validate form error messages and clear on valid input", async ({
     page,
     contactPage,
   }) => {
     // Step 2: Click submit button without filling form
     await contactPage.clickSubmit();
-    await page.waitForTimeout(1000);
 
     // Step 3: Verify error messages are displayed
     const hasErrors = await contactPage.hasErrorMessages();
@@ -44,7 +49,6 @@ test.describe("Contact Form - Test Suite", () => {
     await contactPage.fillAllFields(validContactTestData);
 
     // Step 5: Verify error messages disappear
-    await page.waitForTimeout(500);
     const hasErrorsAfter = await contactPage
       .hasErrorMessages()
       .catch(() => false);
@@ -88,14 +92,11 @@ test.describe("Contact Form - Test Suite", () => {
     homePage,
     contactPage,
   }) => {
-    // Navigate to contact page
-    await homePage.navigate();
-    await homePage.goToContact();
-
     // Test clearing and refilling
+    await contactPage.clearForm();
     await contactPage.fillForename("John");
     let currentValues = await contactPage.getFormValues();
-    await expect(currentValues.forename).toBe("John");
+    expect(currentValues.forename).toBe("John");
 
     await contactPage.clearForm();
     currentValues = await contactPage.getFormValues();

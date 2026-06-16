@@ -12,6 +12,12 @@ test.describe("Shopping Cart - Test Suite", () => {
     await homePage.goToShop();
     await shopPage.waitForPageLoad();
   });
+
+  // teardown after each test
+  test.afterEach(async ({ page }) => {
+    // Optional: Cleanup after all tests
+    await page.close();
+  });
   /**
    * Test Case 3: Shopping Cart Verification
    * Steps:

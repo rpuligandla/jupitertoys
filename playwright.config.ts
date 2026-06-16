@@ -17,6 +17,14 @@ export default defineConfig({
   retries: config.retries,
   workers: config.workers,
   reporter: [["html", { outputFolder: "./playwright-report" }], ["list"]],
+  expect: {
+    /**
+     * Maximum time expect() should wait for the condition to be met.
+     * For example in `await expect(locator).toHaveText();`
+     * 10000 milliseconds = 15 seconds
+     */
+    timeout: 15 * 1000,
+  },
   use: {
     baseURL: config.baseURL,
     trace: "on",
