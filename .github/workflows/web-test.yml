@@ -35,12 +35,6 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      # Set Debug Logging for CI
-      - name: Configure Debug Logging for CI
-        run: |
-          sed -i 's/enabled: true/enabled: false/' utils/debugConfig.ts
-          echo "Debug logging disabled for CI environment"
-
       # Run Tests Step
       - name: Run All UI Tests
         run: npm test
