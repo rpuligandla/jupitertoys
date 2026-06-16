@@ -1,4 +1,4 @@
-# PlanIT Playwright Tests
+# Playwright Tests
 
 Simple Playwright + TypeScript test framework for:
 
@@ -56,6 +56,24 @@ npm run test:debug
 # Open report
 npm run test:report
 ```
+
+## GitHub Actions
+
+This repository includes a GitHub Actions workflow at `.github/workflows/web-test.yml`.
+
+The workflow runs on `push` and `pull_request` events targeting `main`, and can also be started manually using `workflow_dispatch`.
+
+It performs the following steps:
+
+- checks out the repository
+- sets up Node.js using `actions/setup-node`
+- installs dependencies with `npm ci`
+- installs Playwright browsers with `npx playwright install --with-deps`
+- disables debug logging for CI
+- runs the Playwright test suite with `npm test`
+- uploads `test-results/` and `playwright-report/` as workflow artifacts
+
+Artifacts are retained for 30 days by default, with the Playwright report artifact kept for 7 days.
 
 ## Project Structure
 
